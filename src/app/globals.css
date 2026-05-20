@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
+  
+  /* Brand palette */
+  --color-primary: #1f4594;
+  --color-primary-dark: #162f6a;
+  --color-primary-light: #2d5bbf;
+  --color-accent: #f19520;
+  --color-accent-dark: #d4820f;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8f9fc;
+  --color-muted: #a8a9ac;
+  --color-dark: #000000;
+
+  /* Semantic colors */
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+
+  /* Shadow elevation tokens */
+  --shadow-card: 0 4px 24px -4px rgba(31, 69, 148, 0.08);
+  --shadow-elevated: 0 20px 60px -10px rgba(31, 69, 148, 0.15);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-dark);
+  }
+
+  /* Accessible focus styles — visible on all backgrounds */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Custom Global Scrollbars */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(31, 69, 148, 0.2); /* 20% opacity primary blue */
+    border-radius: 10px;
+    border: 3px solid var(--color-surface);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(31, 69, 148, 0.3); /* 30% opacity on hover */
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(31, 69, 148, 0.2) transparent;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+/*
+  Tailwind CSS 4 safelist — ensure dynamically-constructed classes are included.
+  These classes are used via data lookups (not template literals) in components
+  like AboutUs.tsx and SplitScrollValues.tsx, so they are safe from purging.
+  We list them here as an extra safeguard for the production build.
+*/
+@source inline("text-primary text-primary/10 text-accent text-accent/10");
